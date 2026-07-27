@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Puffin — Mini Browser</title>
+<meta name="theme-color" content="#0F3460">
+<meta name="description" content="A lightweight installable browser">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="icons/icon-192.png">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="mobile-web-app-capable" content="yes">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div id="app">
+
+  <!-- Tab strip -->
+  <div id="tabStrip" role="tablist" aria-label="Open tabs">
+    <!-- tabs injected here -->
+    <button id="newTabBtn" aria-label="New tab" title="New tab">+</button>
+  </div>
+
+  <!-- Toolbar -->
+  <div id="toolbar">
+    <button id="backBtn" class="navBtn" disabled aria-label="Go back">
+      <svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <button id="fwdBtn" class="navBtn" disabled aria-label="Go forward">
+      <svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <button id="reloadBtn" class="navBtn" aria-label="Reload">
+      <svg viewBox="0 0 24 24"><path d="M4 4v6h6M20 20v-6h-6M20 10a8 8 0 00-14.9-3M4 14a8 8 0 0014.9 3" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+
+    <form id="urlForm" autocomplete="off">
+      <span id="urlLockIcon">🔒</span>
+      <input id="urlInput" type="text" inputmode="url" placeholder="Search or type a URL" aria-label="Address bar" spellcheck="false">
+    </form>
+
+    <button id="starBtn" class="navBtn" aria-label="Bookmark this page">
+      <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
+    </button>
+    <button id="menuBtn" class="navBtn" aria-label="Menu">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="5" r="1.8" fill="currentColor"/><circle cx="12" cy="12" r="1.8" fill="currentColor"/><circle cx="12" cy="19" r="1.8" fill="currentColor"/></svg>
+    </button>
+  </div>
+
+  <!-- Browsing surface -->
+  <div id="viewport">
+    <!-- iframes injected per-tab here -->
+    <div id="startScreen">
+      <div id="startLogo">🐧</div>
+      <h1>Puffin</h1>
+      <p>Type a URL or search above to start browsing.</p>
+      <div id="startHint">Some big sites (Google, YouTube, Instagram…) block embedding and will open in a new browser tab instead — that's a security rule the sites themselves set, not a bug here.</div>
+    </div>
+  </div>
+
+  <!-- Toast for "opened externally" notices -->
+  <div id="toast"></div>
+
+  <!-- Menu panel -->
+  <div id="overlay"></div>
+  <div id="menuPanel" aria-hidden="true">
+    <div class="panelHeader">
+      <span id="panelTitle">Menu</span>
+      <button id="panelClose" aria-label="Close">✕</button>
+    </div>
+    <div class="panelBody">
+      <div id="menuList">
+        <button class="menuItem" data-view="bookmarks">⭐ Bookmarks</button>
+        <button class="menuItem" data-view="history">🕘 History</button>
+        <button class="menuItem" id="clearHistoryBtn">🗑 Clear history</button>
+      </div>
+      <div id="bookmarksView" class="listView" hidden>
+        <div class="emptyState">No bookmarks yet. Tap ⭐ on any page to save it.</div>
+      </div>
+      <div id="historyView" class="listView" hidden>
+        <div class="emptyState">No history yet.</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
